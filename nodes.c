@@ -20,7 +20,6 @@ pnode addNode (pnode *head)
     int id;
     if(scanf("%d",&id)==0)
     {
-        printf("type integer value");
         return NULL;
     }
     pnode ptn= find_node(id, *head);

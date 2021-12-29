@@ -2,9 +2,13 @@
 #include <stdlib.h>
 #include "graph.h"
 
-void add_edge(pnode* head, pnode *src)
+pedge add_edge(pnode* head, pnode *src)
 {
     pnode dst= addNode(head);
+    if(dst==NULL)
+    {
+        return NULL;
+    }
     int w;
     if(scanf("%d",&w)==1);
     pEdge p = (pEdge) malloc(sizeof(edge));
@@ -12,6 +16,7 @@ void add_edge(pnode* head, pnode *src)
     p->next = (*src)->edges;
     p->dest = dst;
     (*src)->edges = p;
+    return (*src)->edges;
 }
 pedge find_edge(int id, pedge * head)
 {
