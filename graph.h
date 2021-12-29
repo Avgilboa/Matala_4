@@ -38,6 +38,7 @@ void delete_first (pedge* head);
 void remove_edge (pEdge* prev);
 void remove_by_id(int dst, pedge * head);
 void remove_all(pEdge * head);
+void remove_to_id(pnode * head, int id);
 
 void delete_first_node(pnode * head);
 void delete_node(pnode* prev);

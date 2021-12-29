@@ -33,6 +33,7 @@ pnode addNode (pnode *head)
         }
         ptn->id =id;
         ptn->next = *head;
+        ptn->edges =NULL;
         *head =  ptn;
     }
     return ptn;

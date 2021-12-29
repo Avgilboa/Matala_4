@@ -104,6 +104,10 @@ int short_path(pnode* head, int src, int dst)
     make_D(&d,head);
     Dijk(head, src, &d);
     int min_w =((find_d_by_id(d, dst))->w);
+    if(min_w==inf)
+    {
+        return -1;
+    }
     return min_w;
     free(d);
 }

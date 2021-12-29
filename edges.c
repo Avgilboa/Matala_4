@@ -85,3 +85,12 @@ void remove_all(pEdge * head)
         delete_first_edge(head);
     }
 }
+void remove_to_id(pnode * head, int id)
+{
+    pnode p = *head;
+    while(p)
+    {
+        remove_by_id(id, &(p->edges));
+        p =p->next;
+    }
+}
