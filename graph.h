@@ -2,6 +2,8 @@
 #define GRAPH_
 
 #define inf 10000
+
+
 typedef struct GRAPH_NODE *pnode;
 
 typedef struct GRAPH_EDGE{
@@ -50,6 +52,11 @@ p_d_node find_min(p_d_node f);
 void make_D(p_d_node * f , pnode * head);
 void add_d(p_d_node * f , pnode p);
 int countNOdes (pnode* head);
+
+
+int TSP(pnode *head, int cur, int count);
+void per(pnode* head, p_d_node *e, int cur, int size, int count, int* min);
+int c_tsp(pnode  head);
 
 
 #endif
