@@ -148,7 +148,6 @@ int TSP(pnode *head, int cur, int count)
         
         sum += short_path(head, arr[i], arr[i+1]);
     }
-
     free(arr);
     return sum;
 }
@@ -201,11 +200,9 @@ int c_tsp(pnode* head)
     p_d_node d = NULL;
     pnode p =NULL;
     int my_id;
-    printf("size");
     if(scanf("%d", &size));
     for (int i=0; i<size; i++)
     {
-        printf("for loop");
         pnode t = (pnode) malloc(sizeof(node));
         if(scanf("%d", &my_id));
         pnode f = find_node(my_id, *head);
@@ -215,9 +212,14 @@ int c_tsp(pnode* head)
         p = t;
     }
     make_D(&d, &p);
-    total_remove(&p);
+    // total_remove(&p);
     per(head,&d, size, 0, 0,min);
     /// need to do total_delete to d/
+    if((*min)==inf)
+    {
+        *min = -1;
+
+    }
     printf("%d", *min);
     free(min);
 }
