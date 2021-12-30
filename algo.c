@@ -28,7 +28,7 @@ void make_D(p_d_node * f , pnode * head)
     pnode p = *head;
     *f = NULL;
     p_d_node d = *f;
-        while (p)
+    while (p)
     {
         add_d(f, p);
         p=p->next;
@@ -105,6 +105,7 @@ int short_path(pnode* head, int src, int dst)
     Dijk(head, src, &d);
     int min_w =((find_d_by_id(d, dst))->w);
     return min_w;
+    ///// NEED TO DO TOTAL_DELETE TO d;
     free(d);
 }
 int * reversNUm(int curr, int size)
@@ -117,6 +118,7 @@ int * reversNUm(int curr, int size)
         sum_of_digit++;
     }
     int * arr = (int *)malloc(sizeof(int)*size);
+    /// freeing in the tsp function
     if(size > sum_of_digit)
     {
         int w = curr;
@@ -146,6 +148,7 @@ int TSP(pnode *head, int cur, int count)
         
         sum += short_path(head, arr[i], arr[i+1]);
     }
+
     free(arr);
     return sum;
 }
@@ -171,17 +174,38 @@ void per (pnode *q,p_d_node * head, int size, int num,int count, int* min)
         p = p->next;
     }
 }
+void total_remove(pnode * head)
+{
+    pnode p = *head;
+    while(p)
+    {
+        pnode temp = p;
+        p= temp->next;
+        pedge e =temp->edges;
+        while(e)
+        {
+            pedge t = e;
+            e =t->next;
+            free(t);
+        }
+        free(temp);
+    }
+    printf("Done!");
+}
 int c_tsp(pnode* head)
 {
     int * min = (int*) malloc(sizeof(int));
+    ///freeing at the end of the function
     *min = inf;
     int size;
     p_d_node d = NULL;
     pnode p =NULL;
     int my_id;
+    printf("size");
     if(scanf("%d", &size));
     for (int i=0; i<size; i++)
     {
+        printf("for loop");
         pnode t = (pnode) malloc(sizeof(node));
         if(scanf("%d", &my_id));
         pnode f = find_node(my_id, *head);
@@ -191,7 +215,9 @@ int c_tsp(pnode* head)
         p = t;
     }
     make_D(&d, &p);
+    total_remove(&p);
     per(head,&d, size, 0, 0,min);
+    /// need to do total_delete to d/
     printf("%d", *min);
     free(min);
 }

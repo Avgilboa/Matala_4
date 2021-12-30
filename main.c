@@ -4,10 +4,6 @@
 #include "graph.h"
 
 
-
-
-
-
 int main()
 {
     pnode pn =NULL;
@@ -23,7 +19,7 @@ int main()
     // p_d_node d= NULL;
     // int i=0;
     // make_D(&d, &pn);
-    // per(&d, 3, 0);
+    // // per(&d, 3, 0);
     int num = c_tsp(&pn);
     return 0;
 }
