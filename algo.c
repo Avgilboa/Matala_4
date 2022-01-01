@@ -104,6 +104,12 @@ void deep_delete(p_d_node * head)
     p_d_node prev = *head;
     while(prev)
     {
+        if(prev->next==NULL)
+        {
+            free(prev);
+            prev =NULL;
+            continue;
+        }
         p_d_node temp = prev->next;
         free(prev);
         prev = temp;
@@ -222,7 +228,7 @@ void c_tsp(pnode* head)
     {
         *min = -1;
     }
-    printf("TSP shortest path: %d\n", *min);
+    printf("TSP shortest path: %d \n", *min);
     delete_all_node(&p);
     deep_delete(&d);
     free(min);
