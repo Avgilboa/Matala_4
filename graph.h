@@ -7,7 +7,7 @@
 typedef struct GRAPH_NODE *pnode;
 
 typedef struct GRAPH_EDGE{
-    int wight;
+    int weight;
     pnode dest;
     struct GRAPH_EDGE *next;
 } edge, *pEdge, *pedge;
@@ -30,7 +30,7 @@ pnode addNode (pnode *head);
 
 
 pedge add_edge(pnode* head, pnode *src);
-int wight_edge_byid( int src,int dst, pnode * head);
+int weight_edge_byid( int src,int dst, pnode * head);
 pedge find_edge(int id, pedge * head);
 
 
@@ -55,28 +55,11 @@ void add_d(p_d_node * f , pnode p);
 int countNOdes (pnode* head);
 
 
-int countNOdes (pnode* head);
-void add_d(p_d_node * f , pnode p);
-void make_D(p_d_node * f , pnode * head);
-p_d_node find_min(p_d_node f);
-p_d_node find_d_by_id(p_d_node f, int id);
-void Dijk (pnode* head, int sr, p_d_node* f);
-int short_path(pnode* head, int src, int dst);
-int * reversNUm(int curr, int size);
 int TSP(pnode *head, int cur, int count);
-void per (pnode *q,p_d_node * head, int size, int num,int count, int* min);
-int c_tsp(pnode* head);
+// void per(pnode* head, p_d_node *e, int cur, int size, int count, int* min);
+void c_tsp(pnode* head);
 
-void com_a(pnode * head);
-char com_n(pnode * head);
-char com_b(pnode * head);
-void com_d(pnode *head);
-void com_s(pnode * head);
-void com_t(pnode * head);
-void cmd(pnode * head);
-
-void total_remove(pnode * head);
-
+void free_graph(pnode * head);
 
 
 #endif

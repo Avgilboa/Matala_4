@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "graph.h"
+#define inf 10000
 
 int countNOdes (pnode* head)
 {
@@ -24,10 +25,10 @@ void add_d(p_d_node * f , pnode p)
 }
 void make_D(p_d_node * f , pnode * head)
 {
-    int count= countNOdes(head);
+    // int count= countNOdes(head);
     pnode p = *head;
     *f = NULL;
-    p_d_node d = *f;
+    // p_d_node d = *f;
     while (p)
     {
         add_d(f, p);
@@ -87,9 +88,9 @@ void Dijk (pnode* head, int sr, p_d_node* f)
         {
             p_d_node temp = find_d_by_id((*f),e->dest->id);
             // find the adress of this struct and check the short path there.
-            if(temp->w > ((e->wight) +  (prev->w)))
+            if(temp->w > ((e->weight) +  (prev->w)))
             {
-                temp->w =((e->wight) +  (prev->w));
+                temp->w =((e->weight) +  (prev->w));
             }
             e =e->next;
         }
@@ -98,15 +99,25 @@ void Dijk (pnode* head, int sr, p_d_node* f)
         /// iteration on the nodes untill we get everyone.
     }
 }
+void deep_delete(p_d_node * head)
+{
+    p_d_node prev = *head;
+    while(prev)
+    {
+        p_d_node temp = prev->next;
+        free(prev);
+        prev = temp;
+    }
+}
 int short_path(pnode* head, int src, int dst)
 {
     p_d_node d =NULL;
     make_D(&d,head);
     Dijk(head, src, &d);
     int min_w =((find_d_by_id(d, dst))->w);
-    return min_w;
     ///// NEED TO DO TOTAL_DELETE TO d;
-    free(d);
+    deep_delete(&d);
+    return min_w;
 }
 int * reversNUm(int curr, int size)
 {
@@ -143,16 +154,19 @@ int TSP(pnode *head, int cur, int count)
 {
     int sum =0;
     int *arr = reversNUm(cur,count);
+    // printf("per :");
     for(int i=0; i<count-1;i++)
     {
         
         sum += short_path(head, arr[i], arr[i+1]);
     }
+    // printf("%d",sum);
     free(arr);
     return sum;
 }
 void per (pnode *q,p_d_node * head, int size, int num,int count, int* min)
 {
+    
     if(size==0)
     {
         int res = TSP(q,num, count);
@@ -173,25 +187,7 @@ void per (pnode *q,p_d_node * head, int size, int num,int count, int* min)
         p = p->next;
     }
 }
-void total_remove(pnode * head)
-{
-    pnode p = *head;
-    while(p)
-    {
-        pnode temp = p;
-        p= temp->next;
-        pedge e =temp->edges;
-        while(e)
-        {
-            pedge t = e;
-            e =t->next;
-            free(t);
-        }
-        free(temp);
-    }
-    printf("Done!");
-}
-int c_tsp(pnode* head)
+void c_tsp(pnode* head)
 {
     int * min = (int*) malloc(sizeof(int));
     ///freeing at the end of the function
@@ -200,26 +196,34 @@ int c_tsp(pnode* head)
     p_d_node d = NULL;
     pnode p =NULL;
     int my_id;
-    if(scanf("%d", &size));
+    // printf("ENTER SIZE:");
+    scanf("%d", &size);
+    int size9 = 0;
     for (int i=0; i<size; i++)
     {
         pnode t = (pnode) malloc(sizeof(node));
         if(scanf("%d", &my_id));
         pnode f = find_node(my_id, *head);
+        if(f == NULL)
+        {
+            free(t);
+            continue;
+        }
         t->id = f->id;
         t->edges = f->edges;
         t->next = p;
         p = t;
+        size9++;
     }
     make_D(&d, &p);
-    // total_remove(&p);
-    per(head,&d, size, 0, 0,min);
+    per(head,&d, size9, 0, 0,min);
     /// need to do total_delete to d/
-    if((*min)==inf)
+    if((*min) >= inf)
     {
         *min = -1;
-
     }
-    printf("%d", *min);
+    printf("TSP shortest path: %d\n", *min);
+    delete_all_node(&p);
+    deep_delete(&d);
     free(min);
 }
