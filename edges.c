@@ -56,7 +56,10 @@ void remove_edge (pEdge* prev)
 {
     pEdge p = (*prev)->next;
     (*prev)->next=(*prev)->next->next;
-    free(p);
+    if(p!=NULL)
+    {
+        free(p);
+    }
 }
 void remove_by_id(int dst, pedge * head)
 {
@@ -73,9 +76,12 @@ void remove_by_id(int dst, pedge * head)
         if(p->dest->id==dst)
         {
             remove_edge(&prev);
+            p = prev->next;
+            continue;
         }
         p = p->next;
         prev = prev->next;
+
     }
 }
 void remove_all(pEdge * head)

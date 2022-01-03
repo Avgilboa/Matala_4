@@ -16,7 +16,7 @@ int countNOdes (pnode* head)
 }
 void add_d(p_d_node * f , pnode p)
 {
-    p_d_node d =(p_d_node) malloc(sizeof(p_d_node));
+    p_d_node d =(p_d_node) malloc(sizeof(d_node));
     d->w =inf;
     d->node_id = p->id;
     d->visit =0;

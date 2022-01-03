@@ -59,7 +59,5 @@ int TSP(pnode *head, int cur, int count);
 // void per(pnode* head, p_d_node *e, int cur, int size, int count, int* min);
 void c_tsp(pnode* head);
 
-void free_graph(pnode * head);
-
 
 #endif

@@ -70,6 +70,8 @@ void delete_node_byid(pnode *head, int id)//This function delete node by id
         if (p->id == id)
         {
             delete_node(&prev);
+            p = prev->next;
+            continue;
         }
         p = p->next;
         prev = prev->next;

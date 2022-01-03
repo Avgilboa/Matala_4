@@ -36,7 +36,7 @@ void com_a(pnode * head,int flag,int newflag)
     size = scanf("%d", &size);
     return;
 }
-char com_n(pnode * head)
+void com_n(pnode * head)
 {
     // printf("insert new block \n");
     pnode p = addNode(head);
@@ -44,28 +44,22 @@ char com_n(pnode * head)
     {// remove_all(&(p->edges));
          remove_all(&(p->edges));
     }
-    char c;
-    // int d;
-    // int w;
     do{
         if(add_edge(head, &p)==NULL)
         {
-            c = getchar();
-            return c;
+            return;
         }
     } while(1);
 }
-char com_b(pnode * head)
+void com_b(pnode * head)
 // printf("insert new block \n");
 {
     pnode p = addNode(head);
     remove_all(&(p->edges));
-    char c;
     do{
         if(add_edge(head, &p)==NULL)
         {
-            c = getchar();
-            return c;
+            return;
         }
     } while(1);
 }
@@ -88,11 +82,11 @@ void com_s(pnode * head)
     if( scanf("%d", &src));
     if( scanf("%d", &dst));
     int res = short_path(head, src, dst);
-    if(res ==inf)
-    {
-        printf("%d", -1);
-    }
-    printf("Dijsktra shortest path: %d", res);
+    // if(res ==inf)
+    // {
+    //     printf("%d", -1);
+    // }
+    printf("Dijsktra shortest path: %d \n", res);
 }
 void com_t(pnode * head)
 {
@@ -125,13 +119,15 @@ void cmd(pnode * head)
         if(c=='B')
         {
             f =0;
-            c = com_b(head);
+            com_b(head);
+            c = getchar();
             continue;
         }
         if(c=='n')
         {
             f =0;
-            c = com_n(head);
+            com_n(head);
+            c = getchar();
             continue;
         }
         if(c=='D')
